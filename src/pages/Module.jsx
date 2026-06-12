@@ -175,7 +175,11 @@
                 {
                     id: "4a",
                     title: "Senior Staff",
+<<<<<<< HEAD
                     src: "https://www.dropbox.com/scl/fi/cgx6tkf98n4evj2udqf2d/Senior-Staff.mp4?rlkey=kitdqhbe3tje5ll2vjj3wx98v&st=9fp7nijy&raw=1",               
+=======
+                    src: "https://www.dropbox.com/scl/fi/cgx6tkf98n4evj2udqf2d/Senior-Staff.mp4?rlkey=kitdqhbe3tje5ll2vjj3wx98v&st=seww7zre&raw=1",               
+>>>>>>> ba4b833712bbbfa7d136e53af96de1a7e07195e8
                     isLocked: true,
                     //   seconds: 213
                 },
