@@ -740,6 +740,9 @@
                             }}
                             onTimeUpdate={handleTimeUpdate}
                             autoPlay
+                            controls={false}
+                            playsInline
+                            disablePictureInPicture
                         >  
                             <source src={currentVideo.src} type="video/mp4"/>
                         </video>
