@@ -29,7 +29,7 @@ function App() {
             <Route path="/help" element={<Help />}/>
             <Route path="/" element={<Login />} />
             <Route path="/reset-password" element={<ResetPassword />} />
-          </Route>          
+          </Route>
         </Routes> 
     </BrowserRouter>
   );

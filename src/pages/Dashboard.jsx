@@ -24,6 +24,7 @@ export default function Dashboard() {
     ];
     const [totalCompleted, settotalCompleted] = useState(0);
     const [certificate, setCertificate] = useState(false);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -45,7 +46,7 @@ export default function Dashboard() {
         const {data: { session }} = await supabase.auth.getSession();
 
         if (!session) {
-            window.location.href = '/';
+            navigate('/');
         }
     };
 

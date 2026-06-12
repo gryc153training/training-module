@@ -2,6 +2,7 @@
     import { supabase } from '../supabaseClient';
     import  Quizzes  from '../assets/quizzes'
     import { quizData} from '../data/quizData.jsx'
+    import { useNavigate } from 'react-router-dom'
 
     export default function Module() {
     const videos = [
@@ -213,6 +214,7 @@
     const [grycPolicyShow, setgrycPolicyShow] = useState(false);
     const [reportFormsShow, setReportFormsShow] = useState(false);
     const [currentModuleFinished, setCurrentModuleFinished] = useState(false);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -221,7 +223,7 @@
 
 
             if (!session) {
-                window.location.href = '/';
+                navigate('/');
             }
         };
         checkUser();
@@ -622,11 +624,10 @@
 
 
     const goToPolicy = () => {
-            window.open(
-                'https://canva.link/yxtrjkvzy02hc9t',
-                '_blank' 
-                );   
-        
+        window.open(
+            'https://canva.link/yxtrjkvzy02hc9t',
+            '_blank' 
+        );   
     }
 
 

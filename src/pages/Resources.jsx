@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../supabaseClient'
+import { useNavigate } from 'react-router-dom';
 
 export default function Resources() {
-        useEffect(() => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
         const checkUser = async () => {
             const {data: { session }} = await supabase.auth.getSession();
 
 
             if (!session) {
-                window.location.href = '/';
+                navigate('/');
             }
         };
         checkUser();
