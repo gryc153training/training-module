@@ -4,8 +4,7 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 import {HashRouter, Routes, Route} from 'react-router-dom'
-import { supabase } from 'src/supabaseClient.js';
-
+import { supabase } from './supabaseClient';
 
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
