@@ -55,7 +55,7 @@
                 {
                     id: "1f",
                     title: "Medical Incident Reporting",
-                    src: "https://www.dropbox.com/scl/fi/xld4xecq68v9x4qt62ks0/Summer-Rising-Orientation-Presentation-3.mp4?rlkey=tcze1z0d00xtukmn3fxbw3ljk&st=9iolvu7r&raw=1",
+                    src: "https://www.dropbox.com/scl/fi/h9p8cwgpiqdtyfqoowvpc/0609-1.mp4?rlkey=7fforkfz1igbdfj7ke4de1jaq&st=6ybpny6c&raw=1",
                     isLocked: true,
                     //   seconds: 240
                     // FIX IN DROPBOX TRIM IT
