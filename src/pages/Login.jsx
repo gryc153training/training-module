@@ -69,7 +69,7 @@ export default function Login() {
             email,
             password,
             options: {
-                emailRedirectTo: 'http://localhost:5173/dashboard',
+                emailRedirectTo: 'https://gryc153training.github.io/training-module/#/dashboard',
                 data: {
                     display_name: name,
                 }
@@ -111,7 +111,7 @@ export default function Login() {
     }
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'http://localhost:5173/reset-password',
+        redirectTo: 'https://gryc153training.github.io/training-module/#/reset-password',
     });
 
     if (error) {
