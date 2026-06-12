@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import { useNavigate } from 'react-router-dom'
 
@@ -28,6 +28,14 @@ export default function ResetPassword() {
             navigate('/dashboard');
         }
     };
+
+    useEffect(() => {
+        const handleSession = async () => {
+            await supabase.auth.getSessionFromUrl?.(); 
+        };
+
+        handleSession();
+    }, []);
 
     return (
         <div id = "reset-container" className = "container">
