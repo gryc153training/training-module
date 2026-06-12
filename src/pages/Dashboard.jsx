@@ -85,6 +85,8 @@ export default function Dashboard() {
         .eq('user_id', user.id)
         .maybeSingle()
 
+        if(error || !data) continue;
+
         if(data.is_completed_module_4c){
             setCertificate(true)
         } else {
