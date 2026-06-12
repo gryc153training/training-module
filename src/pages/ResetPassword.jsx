@@ -30,11 +30,11 @@ export default function ResetPassword() {
     };
 
     useEffect(() => {
-        const handleSession = async () => {
-            await supabase.auth.getSessionFromUrl?.(); 
+        const checkSession = async () => {
+            await supabase.auth.getSession();
         };
 
-        handleSession();
+        checkSession();
     }, []);
 
     return (
