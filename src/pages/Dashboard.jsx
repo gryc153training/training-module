@@ -65,6 +65,8 @@ export default function Dashboard() {
                 .eq('user_id', user.id)
                 .maybeSingle()
 
+                if(error || !data) continue;
+
                 if(data[column]){
                     total++;
                 }
