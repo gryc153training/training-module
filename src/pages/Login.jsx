@@ -81,7 +81,7 @@ export default function Login() {
             return;
         }
         
-        alert('Signup successful! Check your email for confirmation.')
+        alert('Signup successful! Check your email for confirmation. (Make sure to check you spam folder)')
 
         setName('');
         setEmail('');
@@ -117,7 +117,7 @@ export default function Login() {
     if (error) {
         alert(error.message);
     } else {
-        alert("Password reset email sent! (Make sure to check your Spam)");
+        alert("Password reset email sent! (Make sure to check your spam folder)");
     }
 };
 
