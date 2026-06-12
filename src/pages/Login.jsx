@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { supabase } from '../supabaseClient'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Login() {
@@ -9,6 +10,7 @@ export default function Login() {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [name, setName] = useState('');
     const [isSignup, setIsSignup] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const checkUser = async () => {
@@ -46,7 +48,7 @@ export default function Login() {
         if (error) {
             alert(error.message)
         } else {
-            window.location.href = '/dashboard';
+            navigate('/dashboard');
         }
     };
 
