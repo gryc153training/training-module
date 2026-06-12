@@ -3,12 +3,12 @@
     import  Quizzes  from '../assets/quizzes'
     import { quizData} from '../data/quizData.jsx'
     import { useNavigate } from 'react-router-dom'
-    import { playIcon } from '../assets/play-512.png'
-    import { pauseIcon } from '../assets/pause-512.png'
-    import { muteIcon } from '../assets/mute-2-512.png'
-    import { volumeIcon } from '../assets/volume-up-4-512.png'
-    import { lockIcon } from '../assets/lock.png'
-    import { completionImg } from '../assets/Completion.png'
+    import playIcon from '../assets/play-512.png'
+    import pauseIcon from '../assets/pause-512.png'
+    import muteIcon from '../assets/mute-2-512.png'
+    import volumeIcon from '../assets/volume-up-4-512.png'
+    import lockIcon from '../assets/lock.png'
+    import completionImg from '../assets/Completion.png'
 
     export default function Module() {
     const videos = [
