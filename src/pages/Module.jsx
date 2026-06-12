@@ -3,6 +3,12 @@
     import  Quizzes  from '../assets/quizzes'
     import { quizData} from '../data/quizData.jsx'
     import { useNavigate } from 'react-router-dom'
+    import { playIcon } from '../assets/play-512.png'
+    import { pauseIcon } from '../assets/pause-512.png'
+    import { muteIcon } from '../assets/mute-2-512.png'
+    import { volumeIcon } from '../assets/volume-up-4-512.png'
+    import { lockIcon } from '../assets/lock.png'
+    import { completionImg } from '../assets/Completion.png'
 
     export default function Module() {
     const videos = [
@@ -702,7 +708,7 @@
                                         disabled = {sub.isLocked}
                                     >
                                         {sub.title}
-                                        {sub.isLocked && (<img id = "lock" src ="src\assets\lock.png" alt = "locked"></img>)}
+                                        {sub.isLocked && (<img id = "lock" src ={lockIcon} alt = "locked"></img>)}
                                     </button>
                                     
                                     ))}
@@ -765,12 +771,12 @@
                             </div>
                             <div className="buttons-container">
                                 {isPlaying ? (
-                                    <button id="pause" onClick={pauseVideo}><img src="src\assets\pause-512.png" alt="Pause" width="70%" height="70%" /></button>
+                                    <button id="pause" onClick={pauseVideo}><img src={pauseIcon} alt="Pause" width="70%" height="70%" /></button>
                                 ): (
-                                    <button id="play" onClick={playVideo}><img src="src\assets\play-512.png" alt="Play" width="70%" height="70%" /></button>
+                                    <button id="play" onClick={playVideo}><img src={playIcon} alt="Play" width="70%" height="70%" /></button>
                                 )}
                                 <img id="volume-icon" src={volume === 0 ?
-                                    'src/assets/mute-2-512.png' : "src/assets/volume-up-4-512.png"} alt="Volume" width="70%" height="70%" />
+                                    muteIcon : volumeIcon} alt="Volume" width="70%" height="70%" />
                                 <input type="range" id="volume-slider" min="0" max="1" step="0.01" value={volume} onChange={handleVolumeChange}
                                 style={{
                                     background: `linear-gradient(
@@ -795,7 +801,7 @@
                 :
                 (<div className='certificate-container'>
                     <div className='certificate-wrapper'>
-                        <img className = "certificate-img" src="src\assets\Completion.png"></img>
+                        <img className = "certificate-img" src={completionImg}></img>
                             {/* DONT WANT DATE ON CERTIFICATE TO CHANGE EVERYTIME! WANT TO KEEP DATE OF FIRST APPEARANCE!! IMPORTANT!!*/}
                         <div className='user-name'>{name}</div>
                         <div className = "date" >{new Date().toLocaleDateString()}</div>
