@@ -29,6 +29,7 @@ export default function Header() {
                 <Link to = "/help">Help</Link>
                 {loggedIn ? <button className = 'btn' onClick={async () => {
                     await supabase.auth.signOut();
+                    setLoggedIn(false);
                     navigate('/');
                 }}>Logout</button>
                 :

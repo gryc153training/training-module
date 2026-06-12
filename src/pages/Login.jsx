@@ -117,7 +117,7 @@ export default function Login() {
     if (error) {
         alert(error.message);
     } else {
-        alert("Password reset email sent!");
+        alert("Password reset email sent! (Make sure to check your Spam)");
     }
 };
 
