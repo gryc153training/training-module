@@ -379,9 +379,7 @@
 
 
             let nowModule = tables[currentModule];
-            if (nowModule === 'module_4'){
-                return;
-            }
+
             const dynamicColumnName1 = `is_completed_module_${currentModule+1}` + `${String.fromCharCode(currentSubmodule+97)}`
 
             const {error, data} = await supabase
