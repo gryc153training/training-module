@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { supabase } from '../supabaseClient';
+import { useNavigate } from 'react-router-dom'
+
 
 export default function ResetPassword() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate();
+
 
     const handleReset = async (e) => {
         e.preventDefault();
@@ -21,7 +25,7 @@ export default function ResetPassword() {
             alert(error.message);
         } else {
             alert("Password updated successfully!");
-            window.location.href = '/dashboard';
+            navigate('/dashboard');
         }
     };
 

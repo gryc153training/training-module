@@ -17,7 +17,7 @@ export default function Login() {
             const { data: { session } } = await supabase.auth.getSession();
 
             if (session) {
-                window.location.href = '/dashboard';
+                navigate('/dashboard');
             }
         };
 

@@ -54,7 +54,6 @@ export default function Quizzes({ quiz, onPassQuiz, onFailQuiz}){
                 >
 
                     <h3 className = "quiz-title"> 
-                        {/* SOME REASON BROKEN IDK WHYYYYYY */}
                         {index + 1}
                     </h3>
 
