@@ -1,10 +1,11 @@
 import { supabase } from '../supabaseClient'
 import {useState,useEffect} from 'react'
-
+import { Link, useNavigate } from 'react-router-dom'
 
 
 export default function Header() {
     const [loggedIn, setLoggedIn] = useState(false);
+    const navigate = useNavigate();
  
     useEffect(() => {
         const checkUser = async () => {
@@ -22,13 +23,13 @@ export default function Header() {
         <header> 
             <h1> GRYC PS 153 Training</h1>
             <nav> 
-                <a href = "/dashboard">Dashboard</a>
-                <a href = "/module">Modules</a>
-                <a href = "/resources">Resources</a>
-                <a href = "/help">Help</a>
+                <Link to = "/dashboard">Dashboard</Link>
+                <Link to = "/module">Modules</Link>
+                <Link to = "/resources">Resources</Link>
+                <Link to = "/help">Help</Link>
                 {loggedIn ? <button className = 'btn' onClick={async () => {
                     await supabase.auth.signOut();
-                    window.location.href = '/';
+                    navigate('/');
                 }}>Logout</button>
                 :
                 null}
