@@ -19,6 +19,16 @@ export default function Header() {
         checkUser();
     }, []);
 
+    useEffect(() => {
+        const {
+            data: { subscription },
+        } = supabase.auth.onAuthStateChange((event, session) => {
+        setLoggedIn(!!session);
+        });
+
+        return () => subscription.unsubscribe();
+    }, []);
+
     return (
         <header> 
             <h1> GRYC PS 153 Training</h1>
@@ -29,7 +39,6 @@ export default function Header() {
                 <Link to = "/help">Help</Link>
                 {loggedIn ? <button className = 'btn' onClick={async () => {
                     await supabase.auth.signOut();
-                    setLoggedIn(false);
                     navigate('/');
                 }}>Logout</button>
                 :
