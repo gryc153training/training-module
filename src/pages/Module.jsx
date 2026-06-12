@@ -404,7 +404,9 @@
         if(!user) return;
 
         const dynamicColumnName1 = `module_${currentModule+1}_passed`
-
+        if (currentModule + 1 === 4){
+            return;
+        }
 
         let nowModule = tables[currentModule];
         const {error, data} = await supabase
