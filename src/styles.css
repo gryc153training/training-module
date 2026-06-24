@@ -405,6 +405,26 @@ nav a{
   border-bottom: none;
 }
 
+.completed-btn{
+   background-color: inherit;
+   border: none;
+   font-size: 2rem;
+   font-weight: bold;
+   font-family: inherit;
+}
+
+.completed-btn:hover{
+   cursor: pointer;
+   text-decoration: underline;
+   color: #4043f3;
+}
+
+.click-to-view{
+   font-size: 0.9rem;
+   margin-top: 0;
+   margin-bottom: 0;
+}
+
 /* Quiz Styles */
 
 .quiz{

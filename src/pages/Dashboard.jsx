@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../supabaseClient'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
     const [name, setName] = useState('');
@@ -31,11 +31,12 @@ export default function Dashboard() {
         const fetchName = async () => {
             const {data: {user}} = await supabase.auth.getUser();
             if(user){
-                setName(user.user_metadata.display_name);
+                let firstName = user.user_metadata.display_name.split(" ")
+                setName(firstName[0]);
             }
         };
         fetchName();
-    })
+    }, [])
 
     useEffect(() => {
         checkUser();
@@ -130,7 +131,8 @@ export default function Dashboard() {
 
                 <div className="stat-card">
                     <h3>Certificate</h3>
-                    <span>{certificate ? `Completed` : "Locked"}</span>
+                    <span>{certificate ? <button className = "completed-btn" onClick = {() => navigate('/module?certificate=true')}>Completed</button> : "Locked"}</span>
+                    {certificate ? <p className = 'click-to-view'>(Click to View Certificate)</p> : null}
                 </div>
             </div>
 

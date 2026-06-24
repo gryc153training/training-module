@@ -3,6 +3,7 @@
     import  Quizzes  from '../assets/quizzes'
     import { quizData} from '../data/quizData.jsx'
     import { useNavigate } from 'react-router-dom'
+    import { useSearchParams } from 'react-router-dom';
     import playIcon from '../assets/play-512.png'
     import pauseIcon from '../assets/pause-512.png'
     import muteIcon from '../assets/mute-2-512.png'
@@ -58,7 +59,6 @@
                     src: "https://www.dropbox.com/scl/fi/h9p8cwgpiqdtyfqoowvpc/0609-1.mp4?rlkey=7fforkfz1igbdfj7ke4de1jaq&st=6ybpny6c&raw=1",
                     isLocked: true,
                     //   seconds: 240
-                    // FIX IN DROPBOX TRIM IT
                 },
                 {
                     id: "1g",
@@ -220,7 +220,10 @@
     const [grycPolicyShow, setgrycPolicyShow] = useState(false);
     const [reportFormsShow, setReportFormsShow] = useState(false);
     const [currentModuleFinished, setCurrentModuleFinished] = useState(false);
+    const [isAdvancing, setIsAdvancing] = useState(false);
+    const [date, setDate] = useState('')
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
 
 
     useEffect(() => {
@@ -247,8 +250,53 @@
             }
         };
         fetchName();
-    })
+    }, [])
 
+    useEffect(() => {
+        checkCertificate();
+    }, [])
+
+    const checkCertificate = async () => {
+        const {data: {user}} = await supabase.auth.getUser();
+        if(!user) return;
+
+        const { data } = await supabase
+            .from('module_4')
+            .select('is_completed_module_4c')
+            .eq('user_id', user.id)
+            .maybeSingle();
+
+        if (data?.is_completed_module_4c && searchParams.get('certificate') === 'true'){
+            setIsQuiz(true);
+            setFinishedAllModules(true);
+            fethCompletedDate();
+            setCurrentModule(3);
+            setCurrentSubmodule(2);
+        } else {
+            if(searchParams.get('certificate') === 'true'){
+                
+                alert("You Have Not Completed This Training. Please Watch And Finish All Modules And Quizzes To Receive Your Certificate.")
+                navigate('/module', {replace: true})
+                return;
+            } else {
+                return;
+            }
+        }
+    }
+
+    const fethCompletedDate = async () => {
+        const {data: {user}} = await supabase.auth.getUser();
+        if(!user) return;    
+        
+        const { data } = await supabase.from('quizzes')
+            .select('date_completed')
+            .eq('user_id', user.id)
+            .maybeSingle();
+
+        setDate(data['date_completed'])
+        
+        return;
+    }
 
     const moduleStart = async () => {
         try{
@@ -430,26 +478,49 @@
 
 
     const nextVideo = async () => {
+        if(isAdvancing) return;
+        setIsAdvancing(true);
         const passed = await fetchPassed();
         const completed = await fetchCompleted();
         if(!isQuiz && videoCompleted && (currentSubmodule < videoData[currentModule].subModules.length - 1)){
            if (completed){
                 goToNextSubModule();
+                setTimeout(() => {
+                    setIsAdvancing(false);
+                }, 500);
             }else{
                 setIsQuiz(false);
                 alert("You need to watch the complete video in order to advance.")
+                setTimeout(() => {
+                    setIsAdvancing(false);
+                }, 500);
                 return;
             }
         } else {
             if (passed && currentSubmodule == videoData[currentModule].subModules.length-1){
                 goToNextModule();
+                setTimeout(() => {
+                    setIsAdvancing(false);
+                }, 500);
                 return;
             }
             if(currentModule === 3){
                 setIsQuiz(true);
                 setFinishedAllModules(true);
+                const {data: {user}} = await supabase.auth.getUser();
+                if (!user) return;
+                let updatedDate = new Intl.DateTimeFormat('en-CA').format(new Date());
+                const { data, error } = await supabase.from('quizzes').update({
+                    ['date_completed']: updatedDate
+                })
+                .eq('user_id', user.id)
+                .is('date_completed', null)
+                fethCompletedDate();
             } else {
                 setIsQuiz(true);
+                setTimeout(() => {
+                    setIsAdvancing(false);
+                }, 500);
             }
         }
     }
@@ -798,7 +869,7 @@
                             </div>
                         </div>
                     </div>
-                        {videoEnded && (<button className="continue-btn" onClick={nextVideo}> Continue </button>)}
+                        {videoEnded && (<button className="continue-btn" onClick={nextVideo} disabled={isAdvancing}> Continue </button>)}
                 </div>)
                 :
                 !finishedAllModules ?
@@ -811,11 +882,9 @@
                         <img className = "certificate-img" src={completionImg}></img>
                             {/* DONT WANT DATE ON CERTIFICATE TO CHANGE EVERYTIME! WANT TO KEEP DATE OF FIRST APPEARANCE!! IMPORTANT!!*/}
                         <div className='user-name'>{name}</div>
-                        <div className = "date" >{new Date().toLocaleDateString()}</div>
+                        <div className = "date" >{date}</div>
                     </div> 
-                </div>
-                
-                    )
+                </div>)
                 }
             </div>
         </main>
